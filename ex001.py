@@ -6,7 +6,7 @@ from textual.events import Key, MouseScrollUp
 
 
 class MyApp(App):
-    TITLE = 'Meu APP TOP!!!!!'
+    TITLE = 'MY APP!!!!!'
 
     CSS_PATH = './styles/style.css'
 
