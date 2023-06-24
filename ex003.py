@@ -6,10 +6,11 @@ from textual.events import Key, Click, MouseScrollUp, MouseScrollDown
 
 class MyApp(App):
     TITLE = 'Meu aplicativo TOP!'
-    CSS_PATH = 'teste.css'
+    CSS_PATH = './styles/teste.css'
     BINDINGS = [
         ('t', 'change_theme()', 'Muda o tema!'),
         ('s', 'exit()', 'Sai da aplicação!'),
+        ('b', 'show_all_buttons()', 'Mostra todos os botões!'),
     ]
 
     def action_change_theme(self):
@@ -21,8 +22,7 @@ class MyApp(App):
     def compose(self):
         yield Header()
         with Container(classes='label'):
-            self.label = Label('[b]Será que clicou?[/]')
-            yield self.label
+            yield Label('[b]Será que clicou?[/]', id='label')
         yield Input('Digite algo!')
 
         with Container(classes='buttons'):
@@ -32,14 +32,22 @@ class MyApp(App):
 
         yield Footer()
 
+    def action_show_all_buttons(self):
+        for element in self.query('Button'):
+            self.log('Botão', element.label)
+
     def on_button_pressed(self, event: Button.Pressed):
-        self.label.update(f'[b]Clicado no {event.button.label}[/]')
+        self.query_one('#id').update(f'[b]Clicado no {event.button.label}[/]')
 
     def on_input_changed(self, event: Input.Changed):
-        self.label.update(f'[b]Texto no Input {event.input.value}[/]')
+        try:
+            self.query_one('#id').update(f'[b]Texto no Input {event.input.value}[/]')
+        except:
+            # O evento acontece antes de montar a interface!
+            ...
 
     def on_input_submitted(self, event: Input.Submitted):
-        self.label.update(f'[b red]Texto no Input {event.input.value}[/]')
+        self.query_one('#id').update(f'[b red]Texto no Input {event.input.value}[/]')
 
     def on_key(self, event: Key):
         self.log(f'on_key {event.key} foi precionada', event=event)

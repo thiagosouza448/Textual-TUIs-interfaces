@@ -8,7 +8,7 @@ from textual.events import Key, MouseScrollUp
 class MyApp(App):
     TITLE = 'Meu APP TOP!!!!!'
 
-    CSS_PATH = 'style.css'
+    CSS_PATH = './styles/style.css'
 
     BINDINGS = [
         # O atalho, Action, Mensagem do footer

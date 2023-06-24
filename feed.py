@@ -13,14 +13,6 @@ blogs = [
 ]
 
 
-teste = [
-    'https://www.pypy.org/rss.xml',
-    'https://www.sqlalchemy.org/blog/feed/index.xml',
-    'https://kdenlive.org/en/feed/',
-    'https://pyfound.blogspot.com/feeds/posts/default',
-]
-
-
 def feed_parser():
     tree = Tree('Blogs', id='arvore')
     tree.styles.width = '30%'
